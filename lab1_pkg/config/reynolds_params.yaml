@@ -7,12 +7,33 @@
     number_robots: 10   # number of robots (and controller nodes) to launch
     ca: 0.5             # alignment weight
     cc: 0.2             # cohesion weight
-    cs: 0.2             # separation weight
+    cs: 0.1             # separation weight
     brake_acc: 0.1      # braking deceleration [m/s^2] when no neighbors are visible
     max_acc: 1.0        # acceleration limit [m/s^2]
     f: 10.0             # control frequency [Hz]
     max_range: 2.0
     fov: 360.0
+    
+    cn: 1.0             # navigation weight: a_nav = cn * (v_flock - v_robot)
+    nav_timeout: 1.0    # [s] ignore flock/cmd_vel older than this (navigation rule off)
+
+    # Flock navigation: flock_planning_node
+    inflation_radius: 0.2   # [m] obstacle inflation for the centroid path. ~flock radius keeps the outer robots off the
+                            # walls (0.8 on simple_maze); must stay < ~0.4 on hard_maze (0.9 m corridors) or no path exists
+    rrt_step: 0.25          # [m] RRT-Connect extension step
+    rrt_max_iter: 5000      # iterations per RRT-Connect attempt
+    rrt_attempts: 3         # restarts before giving up
+    rrt_seed: -1            # -1: random seed
+    waypoint_spacing: 0.5   # [m] max distance between consecutive path waypoints
+    plan_on_start: true     # plan to (goal_x, goal_y) once every robot is seen; RViz '2D Goal Pose' replans anytime
+    goal_x: 3.5
+    goal_y: 3.5
+
+    # Flock navigation: flock_controller_node (v = k * (waypoint - centroid), |v| <= v_max)
+    k: 1.0                  # [1/s] proportional gain
+    v_max: 0.3              # [m/s] flock speed limit
+    waypoint_tol: 0.3       # [m] switch to the next waypoint (keep k * waypoint_tol >= v_max to not slow down at each one)
+    goal_tol: 0.1           # [m] goal reached
 
     # Simulation
     map_name: 'empty_10x10' # predefined sphero_stage map: empty_3x3, empty_10x10, simple_maze_10x10,

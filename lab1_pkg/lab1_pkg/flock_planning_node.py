@@ -26,7 +26,6 @@ from lab1_pkg.rrt_connect import RRT_Connect
 
 LATCHED_QOS = QoSProfile(depth=1, durability=DurabilityPolicy.TRANSIENT_LOCAL, reliability=ReliabilityPolicy.RELIABLE)
 
-
 class FlockPlanner(Node):
 
     def __init__(self):

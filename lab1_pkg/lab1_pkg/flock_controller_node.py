@@ -83,6 +83,9 @@ class FlockController(Node):
         if any(p is None for p in self.robot_poses): return None
         return np.mean(self.robot_poses, axis=0)
 
+    # def disable_far_robots(self, max_dist: float):
+    #     '''Disable robots that are too far from the centroid using service calls to the reynolds_node'''
+
     def timer_callback(self):
         c = self.centroid()
         if c is None: return

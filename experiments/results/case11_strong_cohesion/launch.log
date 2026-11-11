@@ -1,0 +1,347 @@
+[INFO] [launch]: All log files can be found below /root/.ros/log/2026-11-02-19-17-31-573605-david-legion-195391
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [launch.user]: Launching 10 Reynolds controllers from /root/ros2_ws/src/Lab1/experiments/results/case11_strong_cohesion/params.yaml
+[INFO] [launch.user]: Map 'empty_10x10' with 10 robots (circle): /root/ros2_ws/install/sphero_stage/share/sphero_stage/config/worlds/empty_10x10_10.world
+[INFO] [map_server-1]: process started with pid [195392]
+[INFO] [lifecycle_manager-2]: process started with pid [195394]
+[INFO] [stage_ros2-3]: process started with pid [195396]
+[INFO] [static_transform_publisher-4]: process started with pid [195398]
+[INFO] [static_transform_publisher-5]: process started with pid [195400]
+[INFO] [static_transform_publisher-6]: process started with pid [195402]
+[INFO] [static_transform_publisher-7]: process started with pid [195404]
+[INFO] [static_transform_publisher-8]: process started with pid [195406]
+[INFO] [static_transform_publisher-9]: process started with pid [195408]
+[INFO] [static_transform_publisher-10]: process started with pid [195410]
+[INFO] [static_transform_publisher-11]: process started with pid [195412]
+[INFO] [static_transform_publisher-12]: process started with pid [195414]
+[INFO] [static_transform_publisher-13]: process started with pid [195416]
+[INFO] [reynolds_node-14]: process started with pid [195418]
+[INFO] [reynolds_node-15]: process started with pid [195420]
+[INFO] [reynolds_node-16]: process started with pid [195440]
+[INFO] [reynolds_node-17]: process started with pid [195502]
+[INFO] [reynolds_node-18]: process started with pid [195559]
+[INFO] [reynolds_node-19]: process started with pid [195563]
+[INFO] [reynolds_node-20]: process started with pid [195566]
+[INFO] [reynolds_node-21]: process started with pid [195569]
+[INFO] [reynolds_node-22]: process started with pid [195574]
+[INFO] [reynolds_node-23]: process started with pid [195576]
+[lifecycle_manager-2] [INFO] [1793647051.657894652] [lifecycle_manager_map_server]: Creating
+[lifecycle_manager-2] [INFO] [1793647051.662402565] [lifecycle_manager_map_server]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[static_transform_publisher-6] [INFO] [1793647051.666016862] [static_tf_publisher_robot_2]: Spinning until stopped - publishing transform
+[static_transform_publisher-6] translation: ('0.000000', '0.000000', '0.000000')
+[static_transform_publisher-6] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-6] from 'map' to 'robot_2/odom'
+[static_transform_publisher-9] [INFO] [1793647051.666677555] [static_tf_publisher_robot_5]: Spinning until stopped - publishing transform
+[static_transform_publisher-9] translation: ('0.000000', '0.000000', '0.000000')
+[static_transform_publisher-9] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-9] from 'map' to 'robot_5/odom'
+[static_transform_publisher-12] [INFO] [1793647051.989761689] [static_tf_publisher_robot_8]: Spinning until stopped - publishing transform
+[static_transform_publisher-12] translation: ('0.000000', '0.000000', '0.000000')
+[static_transform_publisher-12] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-12] from 'map' to 'robot_8/odom'
+[static_transform_publisher-8] [INFO] [1793647051.992197393] [static_tf_publisher_robot_4]: Spinning until stopped - publishing transform
+[static_transform_publisher-8] translation: ('0.000000', '0.000000', '0.000000')
+[static_transform_publisher-8] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-8] from 'map' to 'robot_4/odom'
+[static_transform_publisher-7] [INFO] [1793647051.992970946] [static_tf_publisher_robot_3]: Spinning until stopped - publishing transform
+[static_transform_publisher-7] translation: ('0.000000', '0.000000', '0.000000')
+[static_transform_publisher-7] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-7] from 'map' to 'robot_3/odom'
+[stage_ros2-3] [WARN] [1793647051.992580804] [simulator]: The parameter one_tf_tree is set but deprecated and will be removed in later versions
+[static_transform_publisher-11] [INFO] [1793647051.993381766] [static_tf_publisher_robot_7]: Spinning until stopped - publishing transform
+[static_transform_publisher-11] translation: ('0.000000', '0.000000', '0.000000')
+[static_transform_publisher-11] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-11] from 'map' to 'robot_7/odom'
+[static_transform_publisher-10] [INFO] [1793647051.994431890] [static_tf_publisher_robot_6]: Spinning until stopped - publishing transform
+[static_transform_publisher-10] translation: ('0.000000', '0.000000', '0.000000')
+[static_transform_publisher-10] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-10] from 'map' to 'robot_6/odom'
+[map_server-1] [INFO] [1793647051.997454016] [map_server]: 
+[map_server-1] 	map_server lifecycle node launched. 
+[map_server-1] 	Waiting on external lifecycle transitions to activate
+[map_server-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[map_server-1] [INFO] [1793647051.997633795] [map_server]: Creating
+[static_transform_publisher-13] [INFO] [1793647051.997973137] [static_tf_publisher_robot_9]: Spinning until stopped - publishing transform
+[static_transform_publisher-13] translation: ('0.000000', '0.000000', '0.000000')
+[static_transform_publisher-13] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-13] from 'map' to 'robot_9/odom'
+[static_transform_publisher-4] [INFO] [1793647052.000926701] [static_tf_publisher_robot_0]: Spinning until stopped - publishing transform
+[static_transform_publisher-4] translation: ('0.000000', '0.000000', '0.000000')
+[static_transform_publisher-4] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-4] from 'map' to 'robot_0/odom'
+[lifecycle_manager-2] [INFO] [1793647052.002421777] [lifecycle_manager_map_server]: [34m[1mStarting managed nodes bringup...[0m[0m
+[lifecycle_manager-2] [INFO] [1793647052.002478969] [lifecycle_manager_map_server]: [34m[1mConfiguring map_server[0m[0m
+[static_transform_publisher-5] [INFO] [1793647052.021133492] [static_tf_publisher_robot_1]: Spinning until stopped - publishing transform
+[static_transform_publisher-5] translation: ('0.000000', '0.000000', '0.000000')
+[static_transform_publisher-5] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-5] from 'map' to 'robot_1/odom'
+[map_server-1] [INFO] [1793647052.144165143] [map_server]: Configuring
+[map_server-1] [INFO] [1793647052.144275409] [map_io]: Loading yaml file: /root/ros2_ws/install/sphero_stage/share/sphero_stage/config/maps/empty_10x10/empty_10x10.yaml
+[map_server-1] [INFO] [1793647052.144625912] [map_io]: resolution: 0.05
+[map_server-1] [INFO] [1793647052.144638604] [map_io]: origin[0]: -5
+[map_server-1] [INFO] [1793647052.144642020] [map_io]: origin[1]: -5
+[map_server-1] [INFO] [1793647052.144644896] [map_io]: origin[2]: 0
+[map_server-1] [INFO] [1793647052.144648001] [map_io]: free_thresh: 0.2
+[map_server-1] [INFO] [1793647052.144651087] [map_io]: occupied_thresh: 0.8
+[map_server-1] [INFO] [1793647052.144655695] [map_io]: mode: trinary
+[map_server-1] [INFO] [1793647052.144660163] [map_io]: negate: 0
+[map_server-1] [INFO] [1793647052.144897444] [map_io]: Loading image_file: /root/ros2_ws/install/sphero_stage/share/sphero_stage/config/maps/empty_10x10/empty_10x10.bmp
+[map_server-1] [INFO] [1793647052.148546375] [map_io]: Read map /root/ros2_ws/install/sphero_stage/share/sphero_stage/config/maps/empty_10x10/empty_10x10.bmp: 200 X 200 map @ 0.05 m/cell
+[lifecycle_manager-2] [INFO] [1793647052.261562969] [lifecycle_manager_map_server]: [34m[1mActivating map_server[0m[0m
+[map_server-1] [INFO] [1793647052.262414331] [map_server]: Activating
+[map_server-1] [INFO] [1793647052.262693366] [map_server]: Creating bond (map_server) to lifecycle manager.
+[stage_ros2-3] [INFO] [1793647052.341286489] [simulator]: New Vehicle "robot_0"
+[stage_ros2-3] [INFO] [1793647052.341632824] [simulator]: New Vehicle "robot_1"
+[stage_ros2-3] [INFO] [1793647052.341674318] [simulator]: New Vehicle "robot_2"
+[stage_ros2-3] [INFO] [1793647052.341685307] [simulator]: New Vehicle "robot_3"
+[stage_ros2-3] [INFO] [1793647052.341692951] [simulator]: New Vehicle "robot_4"
+[stage_ros2-3] [INFO] [1793647052.341700124] [simulator]: New Vehicle "robot_5"
+[stage_ros2-3] [INFO] [1793647052.341707397] [simulator]: New Vehicle "robot_6"
+[stage_ros2-3] [INFO] [1793647052.341713748] [simulator]: New Vehicle "robot_7"
+[stage_ros2-3] [INFO] [1793647052.341718376] [simulator]: New Vehicle "robot_8"
+[stage_ros2-3] [INFO] [1793647052.341724427] [simulator]: New Vehicle "robot_9"
+[stage_ros2-3] [INFO] [1793647052.349016709] [simulator]: robot_0 is using unstamped velocity commands.
+[stage_ros2-3] [INFO] [1793647052.352300281] [simulator]: robot_1 is using unstamped velocity commands.
+[stage_ros2-3] [INFO] [1793647052.354716332] [simulator]: robot_2 is using unstamped velocity commands.
+[stage_ros2-3] [INFO] [1793647052.357755901] [simulator]: robot_3 is using unstamped velocity commands.
+[stage_ros2-3] [INFO] [1793647052.360062387] [simulator]: robot_4 is using unstamped velocity commands.
+[stage_ros2-3] [INFO] [1793647052.363168354] [simulator]: robot_5 is using unstamped velocity commands.
+[stage_ros2-3] [INFO] [1793647052.365614649] [simulator]: robot_6 is using unstamped velocity commands.
+[stage_ros2-3] [INFO] [1793647052.368852039] [simulator]: robot_7 is using unstamped velocity commands.
+[stage_ros2-3] [INFO] [1793647052.371681294] [simulator]: robot_8 is using unstamped velocity commands.
+[stage_ros2-3] [INFO] [1793647052.374734207] [simulator]: robot_9 is using unstamped velocity commands.
+[lifecycle_manager-2] [INFO] [1793647052.379864479] [lifecycle_manager_map_server]: Server map_server connected with bond.
+[lifecycle_manager-2] [INFO] [1793647052.380012031] [lifecycle_manager_map_server]: [34m[1mManaged nodes are active[0m[0m
+[lifecycle_manager-2] [INFO] [1793647052.380031265] [lifecycle_manager_map_server]: [34m[1mCreating bond timer...[0m[0m
+[stage_ros2-3]  [Loading /root/ros2_ws/install/sphero_stage/share/sphero_stage/config/worlds/empty_10x10_10.world][Include definitions.inc][Image "../maps/empty_10x10/empty_10x10.bmp"]
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[static_transform_publisher-11] [INFO] [1793647152.595349537] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [reynolds_node-23]: sending signal 'SIGINT' to process[reynolds_node-23]
+[INFO] [reynolds_node-22]: sending signal 'SIGINT' to process[reynolds_node-22]
+[INFO] [reynolds_node-21]: sending signal 'SIGINT' to process[reynolds_node-21]
+[INFO] [reynolds_node-20]: sending signal 'SIGINT' to process[reynolds_node-20]
+[INFO] [reynolds_node-19]: sending signal 'SIGINT' to process[reynolds_node-19]
+[INFO] [reynolds_node-18]: sending signal 'SIGINT' to process[reynolds_node-18]
+[INFO] [reynolds_node-17]: sending signal 'SIGINT' to process[reynolds_node-17]
+[INFO] [reynolds_node-16]: sending signal 'SIGINT' to process[reynolds_node-16]
+[ERROR] [reynolds_node-22]: process has died [pid 195574, exit code -2, cmd '/root/ros2_ws/install/lab1_pkg/lib/lab1_pkg/reynolds_node --ros-args -r __node:=reynolds_node_8 --params-file /root/ros2_ws/src/Lab1/experiments/results/case11_strong_cohesion/params.yaml --params-file /tmp/launch_params_s7p7x940'].
+[ERROR] [reynolds_node-23]: process has died [pid 195576, exit code -2, cmd '/root/ros2_ws/install/lab1_pkg/lib/lab1_pkg/reynolds_node --ros-args -r __node:=reynolds_node_9 --params-file /root/ros2_ws/src/Lab1/experiments/results/case11_strong_cohesion/params.yaml --params-file /tmp/launch_params_hisixoqj'].
+[ERROR] [reynolds_node-19]: process has died [pid 195563, exit code -2, cmd '/root/ros2_ws/install/lab1_pkg/lib/lab1_pkg/reynolds_node --ros-args -r __node:=reynolds_node_5 --params-file /root/ros2_ws/src/Lab1/experiments/results/case11_strong_cohesion/params.yaml --params-file /tmp/launch_params_ndhq9sv8'].
+[INFO] [reynolds_node-15]: sending signal 'SIGINT' to process[reynolds_node-15]
+[ERROR] [reynolds_node-20]: process has died [pid 195566, exit code -2, cmd '/root/ros2_ws/install/lab1_pkg/lib/lab1_pkg/reynolds_node --ros-args -r __node:=reynolds_node_6 --params-file /root/ros2_ws/src/Lab1/experiments/results/case11_strong_cohesion/params.yaml --params-file /tmp/launch_params_bx78q8dj'].
+[INFO] [reynolds_node-14]: sending signal 'SIGINT' to process[reynolds_node-14]
+[ERROR] [reynolds_node-21]: process has died [pid 195569, exit code -2, cmd '/root/ros2_ws/install/lab1_pkg/lib/lab1_pkg/reynolds_node --ros-args -r __node:=reynolds_node_7 --params-file /root/ros2_ws/src/Lab1/experiments/results/case11_strong_cohesion/params.yaml --params-file /tmp/launch_params_h8ehwkus'].
+[ERROR] [reynolds_node-18]: process has died [pid 195559, exit code -2, cmd '/root/ros2_ws/install/lab1_pkg/lib/lab1_pkg/reynolds_node --ros-args -r __node:=reynolds_node_4 --params-file /root/ros2_ws/src/Lab1/experiments/results/case11_strong_cohesion/params.yaml --params-file /tmp/launch_params_obtol6xl'].
+[ERROR] [reynolds_node-16]: process has died [pid 195440, exit code -2, cmd '/root/ros2_ws/install/lab1_pkg/lib/lab1_pkg/reynolds_node --ros-args -r __node:=reynolds_node_2 --params-file /root/ros2_ws/src/Lab1/experiments/results/case11_strong_cohesion/params.yaml --params-file /tmp/launch_params_iur97_qp'].
+[ERROR] [reynolds_node-17]: process has died [pid 195502, exit code -2, cmd '/root/ros2_ws/install/lab1_pkg/lib/lab1_pkg/reynolds_node --ros-args -r __node:=reynolds_node_3 --params-file /root/ros2_ws/src/Lab1/experiments/results/case11_strong_cohesion/params.yaml --params-file /tmp/launch_params_00w2lt0p'].
+[INFO] [static_transform_publisher-13]: sending signal 'SIGINT' to process[static_transform_publisher-13]
+[INFO] [static_transform_publisher-12]: sending signal 'SIGINT' to process[static_transform_publisher-12]
+[ERROR] [reynolds_node-15]: process has died [pid 195420, exit code -2, cmd '/root/ros2_ws/install/lab1_pkg/lib/lab1_pkg/reynolds_node --ros-args -r __node:=reynolds_node_1 --params-file /root/ros2_ws/src/Lab1/experiments/results/case11_strong_cohesion/params.yaml --params-file /tmp/launch_params_8ql2p93s'].
+[INFO] [static_transform_publisher-11]: sending signal 'SIGINT' to process[static_transform_publisher-11]
+[ERROR] [static_transform_publisher-13]: process has died [pid 195416, exit code -2, cmd '/opt/ros/humble/lib/tf2_ros/static_transform_publisher --frame-id map --child-frame-id robot_9/odom --ros-args -r __node:=static_tf_publisher_robot_9'].
+[ERROR] [reynolds_node-14]: process has died [pid 195418, exit code -2, cmd '/root/ros2_ws/install/lab1_pkg/lib/lab1_pkg/reynolds_node --ros-args -r __node:=reynolds_node_0 --params-file /root/ros2_ws/src/Lab1/experiments/results/case11_strong_cohesion/params.yaml --params-file /tmp/launch_params_j8tvegze'].
+[INFO] [static_transform_publisher-10]: sending signal 'SIGINT' to process[static_transform_publisher-10]
+[ERROR] [static_transform_publisher-12]: process has died [pid 195414, exit code -2, cmd '/opt/ros/humble/lib/tf2_ros/static_transform_publisher --frame-id map --child-frame-id robot_8/odom --ros-args -r __node:=static_tf_publisher_robot_8'].
+[INFO] [static_transform_publisher-9]: sending signal 'SIGINT' to process[static_transform_publisher-9]
+[ERROR] [static_transform_publisher-11]: process has died [pid 195412, exit code -2, cmd '/opt/ros/humble/lib/tf2_ros/static_transform_publisher --frame-id map --child-frame-id robot_7/odom --ros-args -r __node:=static_tf_publisher_robot_7'].
+[INFO] [static_transform_publisher-8]: sending signal 'SIGINT' to process[static_transform_publisher-8]
+[ERROR] [static_transform_publisher-10]: process has died [pid 195410, exit code -2, cmd '/opt/ros/humble/lib/tf2_ros/static_transform_publisher --frame-id map --child-frame-id robot_6/odom --ros-args -r __node:=static_tf_publisher_robot_6'].
+[INFO] [static_transform_publisher-7]: sending signal 'SIGINT' to process[static_transform_publisher-7]
+[ERROR] [static_transform_publisher-9]: process has died [pid 195408, exit code -2, cmd '/opt/ros/humble/lib/tf2_ros/static_transform_publisher --frame-id map --child-frame-id robot_5/odom --ros-args -r __node:=static_tf_publisher_robot_5'].
+[INFO] [static_transform_publisher-6]: sending signal 'SIGINT' to process[static_transform_publisher-6]
+[ERROR] [static_transform_publisher-8]: process has died [pid 195406, exit code -2, cmd '/opt/ros/humble/lib/tf2_ros/static_transform_publisher --frame-id map --child-frame-id robot_4/odom --ros-args -r __node:=static_tf_publisher_robot_4'].
+[INFO] [static_transform_publisher-5]: sending signal 'SIGINT' to process[static_transform_publisher-5]
+[ERROR] [static_transform_publisher-7]: process has died [pid 195404, exit code -2, cmd '/opt/ros/humble/lib/tf2_ros/static_transform_publisher --frame-id map --child-frame-id robot_3/odom --ros-args -r __node:=static_tf_publisher_robot_3'].
+[INFO] [static_transform_publisher-4]: sending signal 'SIGINT' to process[static_transform_publisher-4]
+[ERROR] [static_transform_publisher-6]: process has died [pid 195402, exit code -2, cmd '/opt/ros/humble/lib/tf2_ros/static_transform_publisher --frame-id map --child-frame-id robot_2/odom --ros-args -r __node:=static_tf_publisher_robot_2'].
+[INFO] [stage_ros2-3]: sending signal 'SIGINT' to process[stage_ros2-3]
+[INFO] [lifecycle_manager-2]: sending signal 'SIGINT' to process[lifecycle_manager-2]
+[ERROR] [static_transform_publisher-5]: process has died [pid 195400, exit code -2, cmd '/opt/ros/humble/lib/tf2_ros/static_transform_publisher --frame-id map --child-frame-id robot_1/odom --ros-args -r __node:=static_tf_publisher_robot_1'].
+[ERROR] [static_transform_publisher-4]: process has died [pid 195398, exit code -2, cmd '/opt/ros/humble/lib/tf2_ros/static_transform_publisher --frame-id map --child-frame-id robot_0/odom --ros-args -r __node:=static_tf_publisher_robot_0'].
+[INFO] [map_server-1]: sending signal 'SIGINT' to process[map_server-1]
+[static_transform_publisher-10] [INFO] [1793647152.595350438] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[static_transform_publisher-5] [INFO] [1793647152.595367039] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[ERROR] [lifecycle_manager-2]: process has died [pid 195394, exit code -2, cmd '/opt/ros/humble/lib/nav2_lifecycle_manager/lifecycle_manager --ros-args -r __node:=lifecycle_manager_map_server --params-file /tmp/launch_params_p12bv002'].
+[static_transform_publisher-6] [INFO] [1793647152.595370124] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[static_transform_publisher-4] [INFO] [1793647152.595370625] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[lifecycle_manager-2] [INFO] [1793647152.595380824] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[lifecycle_manager-2] [INFO] [1793647152.595449199] [lifecycle_manager_map_server]: Running Nav2 LifecycleManager rcl preshutdown (lifecycle_manager_map_server)
+[lifecycle_manager-2] [INFO] [1793647152.595488060] [lifecycle_manager_map_server]: [34m[1mTerminating bond timer...[0m[0m
+[reynolds_node-23] Traceback (most recent call last):
+[reynolds_node-23]   File "/root/ros2_ws/install/lab1_pkg/lib/lab1_pkg/reynolds_node", line 33, in <module>
+[reynolds_node-23]     sys.exit(load_entry_point('lab1-pkg', 'console_scripts', 'reynolds_node')())
+[reynolds_node-23]   File "/root/ros2_ws/build/lab1_pkg/lab1_pkg/reynolds_node.py", line 158, in main
+[reynolds_node-23]     rclpy.spin(node)
+[reynolds_node-23]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[reynolds_node-23]     executor.spin_once()
+[reynolds_node-23]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 812, in spin_once
+[reynolds_node-23]     self._spin_once_impl(timeout_sec)
+[reynolds_node-23]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 801, in _spin_once_impl
+[reynolds_node-23]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[reynolds_node-23]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 784, in wait_for_ready_callbacks
+[reynolds_node-23]     return next(self._cb_iter)
+[reynolds_node-23]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 681, in _wait_for_ready_callbacks
+[reynolds_node-22] Traceback (most recent call last):
+[reynolds_node-22]   File "/root/ros2_ws/install/lab1_pkg/lib/lab1_pkg/reynolds_node", line 33, in <module>
+[reynolds_node-22]     sys.exit(load_entry_point('lab1-pkg', 'console_scripts', 'reynolds_node')())
+[reynolds_node-22]   File "/root/ros2_ws/build/lab1_pkg/lab1_pkg/reynolds_node.py", line 158, in main
+[reynolds_node-22]     rclpy.spin(node)
+[reynolds_node-22]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[reynolds_node-22]     executor.spin_once()
+[reynolds_node-22]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 812, in spin_once
+[reynolds_node-22]     self._spin_once_impl(timeout_sec)
+[reynolds_node-22]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 801, in _spin_once_impl
+[static_transform_publisher-9] [INFO] [1793647152.595404618] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[reynolds_node-21] Traceback (most recent call last):
+[reynolds_node-21]   File "/root/ros2_ws/install/lab1_pkg/lib/lab1_pkg/reynolds_node", line 33, in <module>
+[reynolds_node-21]     sys.exit(load_entry_point('lab1-pkg', 'console_scripts', 'reynolds_node')())
+[reynolds_node-21]   File "/root/ros2_ws/build/lab1_pkg/lab1_pkg/reynolds_node.py", line 158, in main
+[reynolds_node-21]     rclpy.spin(node)
+[reynolds_node-21]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[reynolds_node-21]     executor.spin_once()
+[reynolds_node-21]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 812, in spin_once
+[reynolds_node-21]     self._spin_once_impl(timeout_sec)
+[reynolds_node-21]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 801, in _spin_once_impl
+[static_transform_publisher-13] [INFO] [1793647152.595417681] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[reynolds_node-16] Traceback (most recent call last):
+[reynolds_node-16]   File "/root/ros2_ws/install/lab1_pkg/lib/lab1_pkg/reynolds_node", line 33, in <module>
+[reynolds_node-16]     sys.exit(load_entry_point('lab1-pkg', 'console_scripts', 'reynolds_node')())
+[reynolds_node-16]   File "/root/ros2_ws/build/lab1_pkg/lab1_pkg/reynolds_node.py", line 158, in main
+[reynolds_node-16]     rclpy.spin(node)
+[reynolds_node-16]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[reynolds_node-16]     executor.spin_once()
+[reynolds_node-16]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 812, in spin_once
+[reynolds_node-16]     self._spin_once_impl(timeout_sec)
+[reynolds_node-16]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 801, in _spin_once_impl
+[reynolds_node-16]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[reynolds_node-16]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 784, in wait_for_ready_callbacks
+[reynolds_node-16]     return next(self._cb_iter)
+[reynolds_node-16]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 681, in _wait_for_ready_callbacks
+[reynolds_node-16]     wait_set.wait(timeout_nsec)
+[reynolds_node-16] KeyboardInterrupt
+[map_server-1] [INFO] [1793647152.595422530] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[map_server-1] [INFO] [1793647152.595529055] [map_server]: Running Nav2 LifecycleNode rcl preshutdown (map_server)
+[map_server-1] [INFO] [1793647152.595590387] [map_server]: Deactivating
+[map_server-1] [INFO] [1793647152.595607839] [map_server]: Destroying bond (map_server) to lifecycle manager.
+[reynolds_node-23]     wait_set.wait(timeout_nsec)
+[reynolds_node-23] KeyboardInterrupt
+[ERROR] [map_server-1]: process has died [pid 195392, exit code -2, cmd '/opt/ros/humble/lib/nav2_map_server/map_server --ros-args -r __node:=map_server --params-file /tmp/launch_params_fig15se2'].
+[reynolds_node-22]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[reynolds_node-22]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 784, in wait_for_ready_callbacks
+[reynolds_node-22]     return next(self._cb_iter)
+[reynolds_node-22]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 681, in _wait_for_ready_callbacks
+[reynolds_node-22]     wait_set.wait(timeout_nsec)
+[reynolds_node-22] KeyboardInterrupt
+[reynolds_node-21]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[reynolds_node-21]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 784, in wait_for_ready_callbacks
+[reynolds_node-21]     return next(self._cb_iter)
+[reynolds_node-21]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 681, in _wait_for_ready_callbacks
+[reynolds_node-21]     wait_set.wait(timeout_nsec)
+[reynolds_node-21] KeyboardInterrupt
+[reynolds_node-14] Traceback (most recent call last):
+[reynolds_node-14]   File "/root/ros2_ws/install/lab1_pkg/lib/lab1_pkg/reynolds_node", line 33, in <module>
+[reynolds_node-14]     sys.exit(load_entry_point('lab1-pkg', 'console_scripts', 'reynolds_node')())
+[reynolds_node-14]   File "/root/ros2_ws/build/lab1_pkg/lab1_pkg/reynolds_node.py", line 158, in main
+[reynolds_node-14]     rclpy.spin(node)
+[reynolds_node-14]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[reynolds_node-14]     executor.spin_once()
+[reynolds_node-14]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 812, in spin_once
+[reynolds_node-14]     self._spin_once_impl(timeout_sec)
+[reynolds_node-14]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 801, in _spin_once_impl
+[reynolds_node-14]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[reynolds_node-14]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 784, in wait_for_ready_callbacks
+[reynolds_node-14]     return next(self._cb_iter)
+[reynolds_node-14]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 681, in _wait_for_ready_callbacks
+[reynolds_node-14]     wait_set.wait(timeout_nsec)
+[reynolds_node-14] KeyboardInterrupt
+[reynolds_node-17] Traceback (most recent call last):
+[reynolds_node-17]   File "/root/ros2_ws/install/lab1_pkg/lib/lab1_pkg/reynolds_node", line 33, in <module>
+[reynolds_node-17]     sys.exit(load_entry_point('lab1-pkg', 'console_scripts', 'reynolds_node')())
+[reynolds_node-17]   File "/root/ros2_ws/build/lab1_pkg/lab1_pkg/reynolds_node.py", line 158, in main
+[reynolds_node-17]     rclpy.spin(node)
+[reynolds_node-17]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[reynolds_node-17]     executor.spin_once()
+[reynolds_node-17]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 812, in spin_once
+[reynolds_node-17]     self._spin_once_impl(timeout_sec)
+[reynolds_node-17]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 801, in _spin_once_impl
+[reynolds_node-17]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[reynolds_node-17]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 784, in wait_for_ready_callbacks
+[reynolds_node-17]     return next(self._cb_iter)
+[reynolds_node-17]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 681, in _wait_for_ready_callbacks
+[reynolds_node-17]     wait_set.wait(timeout_nsec)
+[reynolds_node-17] KeyboardInterrupt
+[reynolds_node-15] Traceback (most recent call last):
+[reynolds_node-15]   File "/root/ros2_ws/install/lab1_pkg/lib/lab1_pkg/reynolds_node", line 33, in <module>
+[reynolds_node-15]     sys.exit(load_entry_point('lab1-pkg', 'console_scripts', 'reynolds_node')())
+[reynolds_node-15]   File "/root/ros2_ws/build/lab1_pkg/lab1_pkg/reynolds_node.py", line 158, in main
+[reynolds_node-15]     rclpy.spin(node)
+[reynolds_node-15]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[reynolds_node-15]     executor.spin_once()
+[reynolds_node-15]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 812, in spin_once
+[reynolds_node-15]     self._spin_once_impl(timeout_sec)
+[reynolds_node-15]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 801, in _spin_once_impl
+[reynolds_node-15]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[reynolds_node-15]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 784, in wait_for_ready_callbacks
+[reynolds_node-15]     return next(self._cb_iter)
+[reynolds_node-15]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 681, in _wait_for_ready_callbacks
+[reynolds_node-15]     wait_set.wait(timeout_nsec)
+[reynolds_node-15] KeyboardInterrupt
+[reynolds_node-19] Traceback (most recent call last):
+[reynolds_node-19]   File "/root/ros2_ws/install/lab1_pkg/lib/lab1_pkg/reynolds_node", line 33, in <module>
+[reynolds_node-19]     sys.exit(load_entry_point('lab1-pkg', 'console_scripts', 'reynolds_node')())
+[reynolds_node-19]   File "/root/ros2_ws/build/lab1_pkg/lab1_pkg/reynolds_node.py", line 158, in main
+[reynolds_node-19]     rclpy.spin(node)
+[reynolds_node-19]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[reynolds_node-19]     executor.spin_once()
+[reynolds_node-19]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 812, in spin_once
+[reynolds_node-19]     self._spin_once_impl(timeout_sec)
+[reynolds_node-19]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 801, in _spin_once_impl
+[reynolds_node-19]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[reynolds_node-19]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 784, in wait_for_ready_callbacks
+[reynolds_node-19]     return next(self._cb_iter)
+[reynolds_node-19]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 681, in _wait_for_ready_callbacks
+[reynolds_node-19]     wait_set.wait(timeout_nsec)
+[reynolds_node-19] KeyboardInterrupt
+[reynolds_node-18] Traceback (most recent call last):
+[reynolds_node-18]   File "/root/ros2_ws/install/lab1_pkg/lib/lab1_pkg/reynolds_node", line 33, in <module>
+[reynolds_node-18]     sys.exit(load_entry_point('lab1-pkg', 'console_scripts', 'reynolds_node')())
+[reynolds_node-18]   File "/root/ros2_ws/build/lab1_pkg/lab1_pkg/reynolds_node.py", line 158, in main
+[reynolds_node-18]     rclpy.spin(node)
+[reynolds_node-18]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[reynolds_node-18]     executor.spin_once()
+[reynolds_node-18]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 812, in spin_once
+[reynolds_node-18]     self._spin_once_impl(timeout_sec)
+[reynolds_node-18]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 801, in _spin_once_impl
+[reynolds_node-18]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[reynolds_node-18]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 784, in wait_for_ready_callbacks
+[reynolds_node-18]     return next(self._cb_iter)
+[reynolds_node-18]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 681, in _wait_for_ready_callbacks
+[reynolds_node-18]     wait_set.wait(timeout_nsec)
+[reynolds_node-18] KeyboardInterrupt
+[static_transform_publisher-7] [INFO] [1793647152.598970433] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[static_transform_publisher-8] [INFO] [1793647152.599161392] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[static_transform_publisher-12] [INFO] [1793647152.599200193] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[reynolds_node-20] Traceback (most recent call last):
+[reynolds_node-20]   File "/root/ros2_ws/install/lab1_pkg/lib/lab1_pkg/reynolds_node", line 33, in <module>
+[reynolds_node-20]     sys.exit(load_entry_point('lab1-pkg', 'console_scripts', 'reynolds_node')())
+[reynolds_node-20]   File "/root/ros2_ws/build/lab1_pkg/lab1_pkg/reynolds_node.py", line 158, in main
+[reynolds_node-20]     rclpy.spin(node)
+[reynolds_node-20]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[reynolds_node-20]     executor.spin_once()
+[reynolds_node-20]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 812, in spin_once
+[reynolds_node-20]     self._spin_once_impl(timeout_sec)
+[reynolds_node-20]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 801, in _spin_once_impl
+[reynolds_node-20]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[reynolds_node-20]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 784, in wait_for_ready_callbacks
+[reynolds_node-20]     return next(self._cb_iter)
+[reynolds_node-20]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 681, in _wait_for_ready_callbacks
+[reynolds_node-20]     wait_set.wait(timeout_nsec)
+[reynolds_node-20] KeyboardInterrupt
+[stage_ros2-3] [INFO] [1793647152.603662296] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[map_server-1] [INFO] [1793647152.607038686] [map_server]: Cleaning up
+[map_server-1] [INFO] [1793647152.607096061] [map_server]: Destroying bond (map_server) to lifecycle manager.
+[stage_ros2-3] [INFO] [1793647152.610134272] [simulator]: rclcpp::ok() is false. Quitting.
+[stage_ros2-3] terminate called without an active exception
+[lifecycle_manager-2] [INFO] [1793647152.619999038] [lifecycle_manager_map_server]: Destroying lifecycle_manager_map_server
+[map_server-1] [INFO] [1793647152.622019730] [map_server]: Destroying
+[ERROR] [stage_ros2-3]: process has died [pid 195396, exit code -6, cmd '/root/ros2_ws/install/stage_ros2/lib/stage_ros2/stage_ros2 --ros-args -r __node:=simulator --params-file /tmp/launch_params_dcsykj4a'].

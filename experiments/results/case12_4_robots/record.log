@@ -1,0 +1,34 @@
+stdin is not a terminal device. Keyboard handling disabled.[INFO] [1793647155.924137048] [rosbag2_recorder]: Press SPACE for pausing/resuming
+[INFO] [1793647155.926021323] [rosbag2_recorder]: Listening for topics...
+[INFO] [1793647155.926108683] [rosbag2_recorder]: Recording...
+[INFO] [1793647155.926117499] [rosbag2_recorder]: Event publisher thread: Starting
+[INFO] [1793647155.926173752] [rosbag2_recorder]: use_sim_time set, waiting for /clock before starting recording...
+[INFO] [1793647158.413778699] [rosbag2_recorder]: Sim time /clock found, starting recording.
+[INFO] [1793647158.417503202] [rosbag2_recorder]: Subscribed to topic '/robot_1/odom'
+[INFO] [1793647158.418365018] [rosbag2_recorder]: Subscribed to topic '/robot_3/reynolds/cohesion'
+[INFO] [1793647158.418932126] [rosbag2_recorder]: Subscribed to topic '/robot_3/reynolds/separation'
+[INFO] [1793647158.419361371] [rosbag2_recorder]: Subscribed to topic '/robot_1/reynolds/total'
+[INFO] [1793647158.419730275] [rosbag2_recorder]: Subscribed to topic '/robot_2/reynolds/alignment'
+[INFO] [1793647158.420156234] [rosbag2_recorder]: Subscribed to topic '/robot_1/cmd_vel'
+[INFO] [1793647158.420510723] [rosbag2_recorder]: Subscribed to topic '/robot_0/reynolds/total'
+[INFO] [1793647158.420867215] [rosbag2_recorder]: Subscribed to topic '/robot_1/reynolds/separation'
+[INFO] [1793647158.421267788] [rosbag2_recorder]: Subscribed to topic '/robot_1/reynolds/alignment'
+[INFO] [1793647158.421633467] [rosbag2_recorder]: Subscribed to topic '/robot_0/reynolds/separation'
+[INFO] [1793647158.422006048] [rosbag2_recorder]: Subscribed to topic '/robot_0/cmd_vel'
+[INFO] [1793647158.422366868] [rosbag2_recorder]: Subscribed to topic '/robot_0/reynolds/cohesion'
+[INFO] [1793647158.422781617] [rosbag2_recorder]: Subscribed to topic '/robot_3/reynolds/total'
+[INFO] [1793647158.423167533] [rosbag2_recorder]: Subscribed to topic '/robot_2/odom'
+[INFO] [1793647158.423529936] [rosbag2_recorder]: Subscribed to topic '/robot_3/reynolds/alignment'
+[INFO] [1793647158.423964651] [rosbag2_recorder]: Subscribed to topic '/robot_3/odom'
+[INFO] [1793647158.424460408] [rosbag2_recorder]: Subscribed to topic '/robot_2/cmd_vel'
+[INFO] [1793647158.424948290] [rosbag2_recorder]: Subscribed to topic '/robot_3/cmd_vel'
+[INFO] [1793647158.425385009] [rosbag2_recorder]: Subscribed to topic '/robot_2/reynolds/total'
+[INFO] [1793647158.425781955] [rosbag2_recorder]: Subscribed to topic '/robot_2/reynolds/separation'
+[INFO] [1793647158.426196614] [rosbag2_recorder]: Subscribed to topic '/robot_0/odom'
+[INFO] [1793647158.426579865] [rosbag2_recorder]: Subscribed to topic '/robot_2/reynolds/cohesion'
+[INFO] [1793647158.426952677] [rosbag2_recorder]: Subscribed to topic '/robot_1/reynolds/cohesion'
+[INFO] [1793647158.427440940] [rosbag2_recorder]: Subscribed to topic '/clock'
+[INFO] [1793647158.427837255] [rosbag2_recorder]: Subscribed to topic '/robot_0/reynolds/alignment'
+[INFO] [1793647258.445846754] [rosbag2_cpp]: Writing remaining messages from cache to the bag. It may take a while
+[INFO] [1793647258.448370828] [rosbag2_recorder]: Event publisher thread: Exiting
+[INFO] [1793647258.448435147] [rosbag2_recorder]: Recording stopped

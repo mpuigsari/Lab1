@@ -1,0 +1,30 @@
+# Parameters shared by every reynolds_node instance.
+# robot_id is set per node by the launch file.
+# The simulation parameters are read by the launch file to create the Stage world.
+/**:
+  ros__parameters:
+    use_sim_time: true
+    number_robots: 10   # number of robots (and controller nodes) to launch
+    ca: 0.5             # alignment weight
+    cc: 0.2             # cohesion weight
+    cs: 0.2             # separation weight
+    brake_acc: 0.1      # braking deceleration [m/s^2] when no neighbors are visible
+    max_acc: 1.0        # acceleration limit [m/s^2]
+    f: 10.0             # control frequency [Hz]
+    max_range: 2.0
+    fov: 360.0
+
+    # Simulation
+    map_name: 'empty_10x10' # predefined sphero_stage map: empty_3x3, empty_10x10, simple_maze_10x10,
+                            # hard_maze_10x10, random_10x10, test_10x10
+    distribution: 'circle'  # initial formation of the robots: 'circle' or 'line'
+    # distribution: 'line'  # initial formation of the robots: 'circle' or 'line'
+    circle:                 # robots evenly distributed on a circle
+      center_x: 0.0
+      center_y: 0.0
+      radius: 1.0
+    line:                   # robots in a straight line 'separation' meters apart
+      center_x: 0.0
+      center_y: 0.0
+      separation: 1.0
+      direction: 'vertical' # 'vertical' or 'horizontal'

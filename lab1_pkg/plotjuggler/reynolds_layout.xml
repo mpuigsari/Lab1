@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Template: the launch file replaces {robot} with the monitor_robot argument -->
+<root>
+ <tabbed_widget name="Main Window" parent="main_window">
+  <Tab tab_name="Velocities robot_{robot}" containers="1">
+   <Container>
+    <DockSplitter orientation="-" sizes="0.500000;0.500000" count="2">
+     <DockArea name="robot_{robot} vx: commanded vs actual">
+      <plot mode="TimeSeries" style="Lines" flip_x="false" flip_y="false">
+       <range left="0" right="1" top="1" bottom="-1"/>
+       <limitY/>
+       <curve name="/robot_{robot}/cmd_vel/linear/x" color="#1f77b4"/>
+       <curve name="/robot_{robot}/odom/twist/twist/linear/x" color="#d62728"/>
+      </plot>
+     </DockArea>
+     <DockArea name="robot_{robot} vy: commanded vs actual">
+      <plot mode="TimeSeries" style="Lines" flip_x="false" flip_y="false">
+       <range left="0" right="1" top="1" bottom="-1"/>
+       <limitY/>
+       <curve name="/robot_{robot}/cmd_vel/linear/y" color="#1f77b4"/>
+       <curve name="/robot_{robot}/odom/twist/twist/linear/y" color="#d62728"/>
+      </plot>
+     </DockArea>
+    </DockSplitter>
+   </Container>
+  </Tab>
+  <Tab tab_name="Velocities robots 0-3" containers="1">
+   <Container>
+    <DockSplitter orientation="-" sizes="0.500000;0.500000" count="2">
+     <DockSplitter orientation="|" sizes="0.500000;0.500000" count="2">
+      <DockArea name="robot_0 velocities">
+       <plot mode="TimeSeries" style="Lines" flip_x="false" flip_y="false">
+        <range left="0" right="1" top="1" bottom="-1"/>
+        <limitY/>
+        <curve name="/robot_0/cmd_vel/linear/x" color="#1f77b4"/>
+        <curve name="/robot_0/odom/twist/twist/linear/x" color="#d62728"/>
+        <curve name="/robot_0/cmd_vel/linear/y" color="#2ca02c"/>
+        <curve name="/robot_0/odom/twist/twist/linear/y" color="#ff7f0e"/>
+       </plot>
+      </DockArea>
+      <DockArea name="robot_1 velocities">
+       <plot mode="TimeSeries" style="Lines" flip_x="false" flip_y="false">
+        <range left="0" right="1" top="1" bottom="-1"/>
+        <limitY/>
+        <curve name="/robot_1/cmd_vel/linear/x" color="#1f77b4"/>
+        <curve name="/robot_1/odom/twist/twist/linear/x" color="#d62728"/>
+        <curve name="/robot_1/cmd_vel/linear/y" color="#2ca02c"/>
+        <curve name="/robot_1/odom/twist/twist/linear/y" color="#ff7f0e"/>
+       </plot>
+      </DockArea>
+     </DockSplitter>
+     <DockSplitter orientation="|" sizes="0.500000;0.500000" count="2">
+      <DockArea name="robot_2 velocities">
+       <plot mode="TimeSeries" style="Lines" flip_x="false" flip_y="false">
+        <range left="0" right="1" top="1" bottom="-1"/>
+        <limitY/>
+        <curve name="/robot_2/cmd_vel/linear/x" color="#1f77b4"/>
+        <curve name="/robot_2/odom/twist/twist/linear/x" color="#d62728"/>
+        <curve name="/robot_2/cmd_vel/linear/y" color="#2ca02c"/>
+        <curve name="/robot_2/odom/twist/twist/linear/y" color="#ff7f0e"/>
+       </plot>
+      </DockArea>
+      <DockArea name="robot_3 velocities">
+       <plot mode="TimeSeries" style="Lines" flip_x="false" flip_y="false">
+        <range left="0" right="1" top="1" bottom="-1"/>
+        <limitY/>
+        <curve name="/robot_3/cmd_vel/linear/x" color="#1f77b4"/>
+        <curve name="/robot_3/odom/twist/twist/linear/x" color="#d62728"/>
+        <curve name="/robot_3/cmd_vel/linear/y" color="#2ca02c"/>
+        <curve name="/robot_3/odom/twist/twist/linear/y" color="#ff7f0e"/>
+       </plot>
+      </DockArea>
+     </DockSplitter>
+    </DockSplitter>
+   </Container>
+  </Tab>
+  <Tab tab_name="Accelerations robot_{robot}" containers="1">
+   <Container>
+    <DockSplitter orientation="-" sizes="0.500000;0.500000" count="2">
+     <DockArea name="robot_{robot} ax: alignment / cohesion / separation / total">
+      <plot mode="TimeSeries" style="Lines" flip_x="false" flip_y="false">
+       <range left="0" right="1" top="1" bottom="-1"/>
+       <limitY/>
+       <curve name="/robot_{robot}/reynolds/alignment/vector/x" color="#1f77b4"/>
+       <curve name="/robot_{robot}/reynolds/cohesion/vector/x" color="#d62728"/>
+       <curve name="/robot_{robot}/reynolds/separation/vector/x" color="#2ca02c"/>
+       <curve name="/robot_{robot}/reynolds/total/vector/x" color="#ff7f0e"/>
+      </plot>
+     </DockArea>
+     <DockArea name="robot_{robot} ay: alignment / cohesion / separation / total">
+      <plot mode="TimeSeries" style="Lines" flip_x="false" flip_y="false">
+       <range left="0" right="1" top="1" bottom="-1"/>
+       <limitY/>
+       <curve name="/robot_{robot}/reynolds/alignment/vector/y" color="#1f77b4"/>
+       <curve name="/robot_{robot}/reynolds/cohesion/vector/y" color="#d62728"/>
+       <curve name="/robot_{robot}/reynolds/separation/vector/y" color="#2ca02c"/>
+       <curve name="/robot_{robot}/reynolds/total/vector/y" color="#ff7f0e"/>
+      </plot>
+     </DockArea>
+    </DockSplitter>
+   </Container>
+  </Tab>
+  <currentTabIndex index="0"/>
+ </tabbed_widget>
+ <use_relative_time_offset enabled="1"/>
+ <!-- - - - - - - - - - - - - - - -->
+ <Plugins>
+  <plugin ID="ROS2 Topic Subscriber">
+   <use_header_stamp value="false"/>
+   <discard_large_arrays value="true"/>
+   <max_array_size value="100"/>
+   <boolean_strings_to_number value="true"/>
+   <remove_suffix_from_strings value="true"/>
+   <selected_topics value="/robot_{robot}/cmd_vel;/robot_{robot}/odom;/robot_{robot}/reynolds/alignment;/robot_{robot}/reynolds/cohesion;/robot_{robot}/reynolds/separation;/robot_{robot}/reynolds/total;/robot_0/cmd_vel;/robot_0/odom;/robot_1/cmd_vel;/robot_1/odom;/robot_2/cmd_vel;/robot_2/odom;/robot_3/cmd_vel;/robot_3/odom"/>
+  </plugin>
+ </Plugins>
+ <previouslyLoaded_Datafiles/>
+ <previouslyLoaded_Streamer name="ROS2 Topic Subscriber"/>
+</root>

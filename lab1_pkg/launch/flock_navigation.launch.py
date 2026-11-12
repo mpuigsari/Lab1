@@ -99,6 +99,10 @@ def launch_setup(context, *args, **kwargs):
                 arguments=['-d', write_flock_rviz_config(number_robots)],
                 parameters=[{'use_sim_time': True}],
                 output='screen'),
+            Node(
+                package='lab1_pkg', executable='flock_markers_node', name='flock_markers_node',
+                parameters=[{'number_robots': number_robots, 'use_sim_time': True}],
+                output='screen'),
         ]
     return actions
 

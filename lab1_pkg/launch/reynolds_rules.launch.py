@@ -15,6 +15,29 @@ ROBOT_LINE = 'robot ( pose [ {x:.3f} {y:.3f} 0 0.000 ] name "robot_{k}" color "b
 # The generated rviz config and plotjuggler layout are written here
 OUTPUT_DIR = os.path.expanduser('~/.ros/lab1_pkg')
 
+# One color per robot trajectory in the plotjuggler XY plot (cycled if there are more robots)
+PLOT_COLORS = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd',
+               '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf']
+
+# RViz display of flock_markers_node
+MARKERS_DISPLAY = {
+    'Class': 'rviz_default_plugins/MarkerArray', 'Name': 'FlockMarkers', 'Enabled': True, 'Namespaces': {},
+    'Topic': {'Depth': 100, 'Durability Policy': 'Volatile', 'History Policy': 'Keep Last',
+              'Reliability Policy': 'Reliable', 'Value': '/flock/markers'},
+    'Value': True}
+TOP_DOWN_VIEW = {
+    'Class': 'rviz_default_plugins/TopDownOrtho', 'Name': 'Current View', 'Value': 'TopDownOrtho (rviz_default_plugins)',
+    'Angle': 0.0, 'Scale': 70.0, 'X': 0.0, 'Y': 0.0, 'Invert Z Axis': False,
+    'Near Clip Distance': 0.01, 'Target Frame': '<Fixed Frame>'}
+
+
+def markers_node(number_robots):
+    '''Robots colored by obstacle avoidance + trajectories, shown in RViz'''
+    return Node(
+        package='lab1_pkg', executable='flock_markers_node', name='flock_markers_node',
+        parameters=[{'number_robots': number_robots, 'use_sim_time': True}],
+        output='screen')
+
 
 def distribute_circle(k, n, center_x=0, center_y=0, radius=1):
     '''Robots evenly distributed on a circle'''
@@ -32,7 +55,8 @@ def distribute_line(k, n, center_x=0, center_y=0, separation=0.5, direction='hor
 
 
 def write_rviz_config(template_file, number_robots):
-    '''Copy the sphero rviz config with one RobotModel display per robot and return its path'''
+    '''Copy the sphero rviz config with one RobotModel display per robot, plus the flock markers
+    (robots colored by obstacle avoidance and their trajectories), in a top-down view. Return its path'''
     with open(template_file, 'r') as f:
         rviz = yaml.safe_load(f)
 
@@ -41,14 +65,25 @@ def write_rviz_config(template_file, number_robots):
     if not robot_models:
         raise RuntimeError(f'No RobotModel display found in {template_file}')
 
-    # Replace the fixed robot displays with one copy per robot, at the same place in the list
+    # Replace the fixed robot displays with one copy per robot, at the same place in the list.
+    # They are off by default: the flock markers draw the robots with the obstacle avoidance color
     index = displays.index(robot_models[0])
     displays[:] = [d for d in displays if d['Class'] != 'rviz_default_plugins/RobotModel']
     for i in range(number_robots):
         model = copy.deepcopy(robot_models[0])
         model['Name'] = f'RobotModel{i}'
         model['TF Prefix'] = f'/robot_{i}'
+        model['Enabled'] = False
         displays.insert(index + i, model)
+
+    # The robot frames clutter the trajectories: TF off by default (can be enabled in RViz)
+    for d in displays:
+        if d['Class'] == 'rviz_default_plugins/TF':
+            d['Enabled'] = False
+    displays.append(copy.deepcopy(MARKERS_DISPLAY))
+
+    # Top-down view of the whole 10 x 10 m map, to look at the trajectories
+    rviz['Visualization Manager']['Views']['Current'] = copy.deepcopy(TOP_DOWN_VIEW)
 
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     output_file = os.path.join(OUTPUT_DIR, f'reynolds_{number_robots}.rviz')
@@ -57,16 +92,43 @@ def write_rviz_config(template_file, number_robots):
     return output_file
 
 
-def write_plotjuggler_layout(template_file, robot):
-    '''Replace {robot} in the plotjuggler layout with the monitored robot and return its path'''
+def expand_foreach_robot(root, number_robots):
+    '''Replace every element marked foreach_robot="true" by one copy per robot, with {i} replaced by
+    the robot index and {color} by a palette color (e.g. one XY curve per robot trajectory)'''
+    for parent in list(root.iter()):
+        children = []
+        for child in parent:
+            if child.get('foreach_robot') != 'true':
+                children.append(child)
+                continue
+            for i in range(number_robots):
+                copy_ = copy.deepcopy(child)
+                del copy_.attrib['foreach_robot']
+                color = PLOT_COLORS[i % len(PLOT_COLORS)]
+                for key, value in copy_.attrib.items():
+                    copy_.set(key, value.replace('{i}', str(i)).replace('{color}', color))
+                children.append(copy_)
+        parent[:] = children
+
+
+def write_plotjuggler_layout(template_file, robot, number_robots):
+    '''Expand the plotjuggler layout template and return its path: {robot} is the monitored robot,
+    foreach_robot elements and {i} topics are repeated for every robot'''
     with open(template_file, 'r') as f:
         root = ET.fromstring(f.read().replace('{robot}', str(robot)))
+    expand_foreach_robot(root, number_robots)
 
-    # The monitored robot can also be one of the overview robots: drop repeated topics
+    # Topics with {i} are subscribed for every robot. The monitored robot can also be one of the
+    # overview robots: drop repeated topics
     topics = root.find('.//selected_topics')
     if topics is not None:
-        unique = dict.fromkeys(topics.get('value').split(';'))
-        topics.set('value', ';'.join(unique))
+        expanded = []
+        for topic in topics.get('value').split(';'):
+            if '{i}' in topic:
+                expanded += [topic.replace('{i}', str(i)) for i in range(number_robots)]
+            else:
+                expanded.append(topic)
+        topics.set('value', ';'.join(dict.fromkeys(expanded)))
 
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     output_file = os.path.join(OUTPUT_DIR, f'reynolds_layout_robot_{robot}.xml')
@@ -136,6 +198,7 @@ def simulation_nodes(params, number_robots, start_rviz):
                 arguments=['-d', rviz_config],
                 parameters=[{'use_sim_time': True}],
                 output='screen'),
+            markers_node(number_robots),
         ]
     return nodes
 
@@ -160,7 +223,7 @@ def launch_setup(context, *args, **kwargs):
             raise RuntimeError(
                 f'monitor_robot={robot}, but only robots 0 to {number_robots - 1} exist')
         layout = write_plotjuggler_layout(
-            LaunchConfiguration('plotjuggler_layout').perform(context), robot)
+            LaunchConfiguration('plotjuggler_layout').perform(context), robot, number_robots)
         actions.append(Node(
             package='plotjuggler', executable='plotjuggler', name='plotjuggler',
             arguments=['--layout', layout],
@@ -198,7 +261,8 @@ def generate_launch_description():
             description='Launch PlotJuggler with the velocity/acceleration layout'),
         DeclareLaunchArgument(
             'plotjuggler_layout', default_value=default_layout,
-            description='PlotJuggler layout file, {robot} is replaced by monitor_robot'),
+            description='PlotJuggler layout file, {robot} is replaced by monitor_robot, '
+                        'foreach_robot elements and {i} topics are repeated for every robot'),
         DeclareLaunchArgument(
             'monitor_robot', default_value='0',
             description='Robot shown in the single robot PlotJuggler tabs'),

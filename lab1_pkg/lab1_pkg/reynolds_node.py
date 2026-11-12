@@ -4,6 +4,7 @@ from rclpy.qos import QoSProfile, DurabilityPolicy, ReliabilityPolicy
 from geometry_msgs.msg import Twist, Vector3Stamped
 from nav_msgs.msg import Odometry
 from nav_msgs.msg import OccupancyGrid
+from std_msgs.msg import Float64
 from std_srvs.srv import SetBool
 
 import numpy as np
@@ -47,8 +48,10 @@ class BoidController(Node):
         self.declare_parameter("fov", 135.0)  # Neighbors maximum field of view
         self.declare_parameter("brake_acc", 0.1)  # braking deceleration [m/s^2] when no neighbors are visible (magnitude)
         self.declare_parameter("max_acc", 1.0)  # acceleration limit [m/s^2], in any direction (magnitude)
+        
         self.declare_parameter("cn", 1.0)  # navigation weight (match the flock velocity from flock/cmd_vel)
         self.declare_parameter("nav_timeout", 1.0)  # [s] flock/cmd_vel older than this is ignored
+
         self.declare_parameter("co", 0.02)  # obstacle avoidance weight
         self.declare_parameter("obs_range", 0.5)  # [m] obstacles farther than this are ignored (potential influence distance)
 
@@ -84,7 +87,7 @@ class BoidController(Node):
         self.nav_vel = None    # flock velocity [vx, vy] from the flock controller
         self.nav_stamp = None  # arrival time of nav_vel
         self.avoid_obstacles = None        # ObstacleAvoidance, created when the map arrives
-        self.enabled_navigation = True # Flag to enable/disable navigation rule (when robot is too far from centroid)
+        self.enabled = True # Flag to enable/disable navigation rule (when robot is too far from centroid)
 
         # Subscribers
         self.map_sub = self.create_subscription(OccupancyGrid, 'map', self.map_callback, LATCHED_QOS)  # Occupancy grid map, received once
@@ -98,13 +101,17 @@ class BoidController(Node):
         # Publisher for the velocity cmd
         self.publisher_ = self.create_publisher(Twist, f'robot_{self.robot_id}/cmd_vel', 10)
 
-        # Publishers for the acceleration of each rule and the total (for plotting)
+        # Publishers for the acceleration of each rule and the total, as a vector and as its magnitude (for plotting)
+        rules = ('alignment', 'cohesion', 'separation', 'navigation', 'obstacle', 'total')
         self.accel_pubs = {
             name: self.create_publisher(Vector3Stamped, f'robot_{self.robot_id}/reynolds/{name}', 10)
-            for name in ('alignment', 'cohesion', 'separation', 'navigation', 'obstacle', 'total')}
+            for name in rules}
+        self.accel_norm_pubs = {
+            name: self.create_publisher(Float64, f'robot_{self.robot_id}/reynolds/{name}/magnitude', 10)
+            for name in rules}
 
         # Service to enable/disable the navigation rule
-        self.create_service(SetBool, f'robot_{self.robot_id}/reynolds/enable_navigation', self.enable_navigation_callback)
+        self.create_service(SetBool, f'robot_{self.robot_id}/reynolds/enable', self.enable_callback)
 
         # Main timer only if there are more than 1 robot
         if self.number_robots > 1: 
@@ -112,11 +119,11 @@ class BoidController(Node):
         else: 
             self.get_logger().warn('No neighbors detected. Skipping Reynolds calculation.')
 
-    def enable_navigation_callback(self, request, response):
+    def enable_callback(self, request, response):
         '''Service to enable/disable the navigation rule'''
-        self.enabled_navigation = request.data
+        self.enabled = request.data
         response.success = True
-        response.message = f'Navigation rule {"enabled" if self.enabled_navigation else "disabled"}'
+        response.message = f'Navigation rule {"enabled" if self.enabled else "disabled"}'
         return response
     
     def map_callback(self, msg: OccupancyGrid):
@@ -154,7 +161,17 @@ class BoidController(Node):
         '''Control loop that calculates the desired acceleration for robot i based on its neighbors following Reynolds Rules'''
         # No odometry from robot i arrived yet
         if self.robot_pose is None or self.robot_vel is None: return 
-
+        if not self.enabled: 
+            # Brake until stop if disabled
+            if np.linalg.norm(self.robot_vel) > 5e-2:
+                brake_acc = -self.brake_acc * self.robot_vel / np.linalg.norm(self.robot_vel)
+                vd = self.robot_vel + brake_acc * self.dt
+                msg_vel = Twist()
+                msg_vel.linear.x = vd[0]
+                msg_vel.linear.y = vd[1]
+                self.publisher_.publish(msg_vel)
+            return
+        
         # Reynolds acceleration
         reynolds_accs = self.ReynoldsAccs.solve_reynolds(self.robot_pose, self.robot_vel,
                                                          self.neigh_poses, self.neigh_vels)
@@ -163,11 +180,11 @@ class BoidController(Node):
         a_sep = reynolds_accs['separation']
         a_ali = reynolds_accs['alignment']
         a_coh = reynolds_accs['cohesion']
-        a_nav = self.navigation_acc() if self.enabled_navigation else np.zeros(2)
+        a_nav = self.navigation_acc() if self.enabled else np.zeros(2)
         a_obs = self.avoid_obstacles.solve_obstacle(self.robot_pose) if self.avoid_obstacles is not None else np.zeros(2)
 
         # Acceleration calculaltion
-        order = [('obstacle', a_obs), ('separation', a_sep), ('alignment', a_ali), ('cohesion', a_coh), ('navigation', a_nav)]
+        order = [('obstacle', a_obs), ('separation', a_sep), ('cohesion', a_coh) ,('navigation', a_nav), ('alignment', a_ali) ]
         x_dotdot, used = allocate(order, self.max_acc)
         self.publish_accels({**used, 'total': x_dotdot})
 
@@ -184,7 +201,7 @@ class BoidController(Node):
         self.publisher_.publish(msg_vel)
 
     def publish_accels(self, accels):
-        '''Publish each acceleration [ax, ay] on its debug topic'''
+        '''Publish each acceleration [ax, ay] and its magnitude on its debug topics'''
         stamp = self.get_clock().now().to_msg()
         for name, accel in accels.items():
             msg = Vector3Stamped()
@@ -193,6 +210,7 @@ class BoidController(Node):
             msg.vector.x = float(accel[0])
             msg.vector.y = float(accel[1])
             self.accel_pubs[name].publish(msg)
+            self.accel_norm_pubs[name].publish(Float64(data=float(np.linalg.norm(accel))))
 
 def main(args = None):
     rclpy.init(args=args)

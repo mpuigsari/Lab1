@@ -5,19 +5,20 @@
   ros__parameters:
     use_sim_time: true
     number_robots: 10   # number of robots (and controller nodes) to launch
-    ca: 0.2             # alignment weight
-    cc: 0.3             # cohesion weight
+    ca: 0.1             # alignment weight
+    cc: 0.2             # cohesion weight
     cs: 0.2             # separation weight
     brake_acc: 0.1      # braking deceleration [m/s^2] when no neighbors are visible
     max_acc: 1.0        # acceleration limit [m/s^2]
     f: 10.0             # control frequency [Hz]
-    max_range: 20.0
+    max_range: 2.5
     fov: 360.0
-    
-    cn: 1.0             # navigation weight: a_nav = cn * (v_flock - v_robot)
+    cn: 0.1             # navigation weight: a_nav = cn * (v_flock - v_robot)
     nav_timeout: 1.0    # [s] ignore flock/cmd_vel older than this (navigation rule off)
-    co: 0.1            # obstacle weight: a_obs = co * (1/r - 1/obs_range) / r^2, r = distance to the closest obstacle, 0.0 to disable obstacle avoidance
-    obs_range: 0.5      # [m] obstacle influence distance (a_obs = 0 beyond it)
+    
+    # Obstacle avoidance parameters
+    co: 0.01            # obstacle weight: a_obs = co * (1/r - 1/obs_range) / r^2, r = distance to the closest obstacle, 0.0 to disable obstacle avoidance
+    obs_range: 0.2      # [m] obstacle influence distance (a_obs = 0 beyond it)
 
     # Flock navigation: flock_planning_node
     inflation_radius: 0.5   # [m] obstacle inflation for the centroid path. ~flock radius keeps the outer robots off the
@@ -36,16 +37,19 @@
     v_max: 0.3              # [m/s] flock speed limit
     waypoint_tol: 0.3       # [m] switch to the next waypoint (keep k * waypoint_tol >= v_max to not slow down at each one)
     goal_tol: 0.1           # [m] goal reached
+    max_dist: 2.5             # [m] robots farther from the centroid stop following flock/cmd_vel
+    max_dist_hysteresis: 1.0  # [m] navigation is enabled again below max_dist - max_dist_hysteresis
 
     # Simulation
-    map_name: 'simple_maze_10x10' # predefined sphero_stage map: empty_3x3, empty_10x10, simple_maze_10x10,
+    map_name: 'hard_maze_10x10' # predefined sphero_stage map: empty_3x3, empty_10x10, simple_maze_10x10,
                             # hard_maze_10x10, random_10x10, test_10x10
     distribution: 'circle'  # initial formation of the robots: 'circle' or 'line'
     # distribution: 'line'  # initial formation of the robots: 'circle' or 'line'
     circle:                 # robots evenly distributed on a circle
       center_x: -3.0
       center_y: -4.0
-      radius: 0.8
+      # radius: 0.8
+      radius: 0.6
     line:                   # robots in a straight line 'separation' meters apart
       center_x: 0.0
       center_y: 0.0

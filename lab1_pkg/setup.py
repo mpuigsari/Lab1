@@ -33,6 +33,7 @@ setup(
             'reynolds_node = lab1_pkg.reynolds_node:main',
             'flock_planning_node = lab1_pkg.flock_planning_node:main',
             'flock_controller_node = lab1_pkg.flock_controller_node:main',
+            'flock_markers_node = lab1_pkg.flock_markers_node:main',
         ],
     },
 )

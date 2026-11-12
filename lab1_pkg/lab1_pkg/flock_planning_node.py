@@ -21,8 +21,8 @@ from rclpy.qos import QoSProfile, DurabilityPolicy, ReliabilityPolicy
 from geometry_msgs.msg import PoseStamped
 from nav_msgs.msg import OccupancyGrid, Odometry, Path
 
-from lab1_pkg.grid_map import GridMap
-from lab1_pkg.rrt_connect import RRT_Connect
+from lab1_pkg.utils.grid_map import GridMap
+from lab1_pkg.utils.rrt_connect import RRT_Connect
 
 LATCHED_QOS = QoSProfile(depth=1, durability=DurabilityPolicy.TRANSIENT_LOCAL, reliability=ReliabilityPolicy.RELIABLE)
 

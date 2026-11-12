@@ -1,0 +1,65 @@
+# Lab 2, map (d): hard_maze_10x10, corridors ~1.7 m, doors and corners
+# Launch: ros2 launch lab1_pkg flock_navigation.launch.py params_file:=$(ros2 pkg prefix lab1_pkg)/share/lab1_pkg/config/lab2_hard_maze.yaml
+/**:
+  ros__parameters:
+    use_sim_time: true
+    number_robots: 10   # number of robots (and controller nodes) to launch
+    ca: 0.1             # alignment weight
+    cc: 0.4             # cohesion weight
+    cs: 0.2             # separation weight
+    brake_acc: 0.1      # [m/s^2] braking deceleration of a robot disabled by the flock controller (farther than max_dist)
+    max_acc: 1.0        # [m/s^2] acceleration limit (prioritized allocation budget)
+    max_speed: 0.5      # [m/s] speed limit of the commanded velocity
+    f: 10.0             # control frequency [Hz]
+    max_range: 2.5
+    fov: 360.0
+    cn: 0.5             # navigation weight: a_nav = cn * (v_flock - v_robot)
+    nav_timeout: 1.0    # [s] ignore flock/cmd_vel older than this (navigation rule off)
+
+    # Obstacle avoidance 1: potential field (repulsion), close range safety rule
+    co: 0.01            # weight: a_obs = co * (1/r - 1/obs_range) / r^2, r = distance to the closest obstacle. 0.0 disables it
+    obs_range: 0.25     # [m] obstacle influence distance (a_obs = 0 beyond it)
+
+    # Obstacle avoidance 2: steer-to-avoid, look ahead along the heading and steer to the closest free direction
+    csa: 2.0                # weight: a = csa * (1 - d/L) * (|v| u_free - v), d = free distance ahead. 0.0 disables it
+    steer_time: 1.5         # [s] look-ahead distance L = steer_min_dist + steer_time * speed
+    steer_min_dist: 0.3     # [m]
+    steer_radius: 0.12      # [m] half width of the corridor that must be free (robot radius 0.0375 + margin)
+    steer_angle_step: 15.0  # [deg] angle between the feelers of the fan
+    steer_max_angle: 90.0   # [deg] largest deviation from the heading that is tried
+    steer_debug: true       # publish the feelers on /flock/feelers (RViz)
+
+    # Flock navigation: flock_planning_node
+    inflation_radius: 0.5   # [m] obstacle inflation for the centroid path. ~flock radius keeps the outer robots off the
+                            # walls. The hard maze corridors are ~1.7 m wide: a path exists up to ~0.6
+    rrt_step: 0.25          # [m] RRT-Connect extension step
+    rrt_max_iter: 5000      # iterations per RRT-Connect attempt
+    rrt_attempts: 3         # restarts before giving up
+    rrt_seed: 1            # -1: random seed
+    waypoint_spacing: 0.5   # [m] max distance between consecutive path waypoints
+    plan_on_start: true     # plan to (goal_x, goal_y) once every robot is seen; RViz '2D Goal Pose' replans anytime
+    goal_x: 2.5
+    goal_y: 3.9
+
+    # Flock navigation: flock_controller_node (arrival: v = min(v_max, k * remaining path length) towards the waypoint)
+    k: 0.3                  # [1/s] arrival gain: the flock slows down over the last v_max / k meters of the path
+    v_max: 0.3              # [m/s] flock speed limit
+    waypoint_tol: 0.3       # [m] switch to the next waypoint
+    goal_tol: 0.1           # [m] goal reached
+    max_dist: 2.5             # [m] robots farther from the centroid stop following flock/cmd_vel
+    max_dist_hysteresis: 1.0  # [m] navigation is enabled again below max_dist - max_dist_hysteresis
+
+    # Simulation
+    map_name: 'hard_maze_10x10' # predefined sphero_stage map: empty_3x3, empty_10x10, simple_maze_10x10,
+                            # hard_maze_10x10, random_10x10, test_10x10
+    distribution: 'circle'  # initial formation of the robots: 'circle' or 'line'
+    # distribution: 'line'  # initial formation of the robots: 'circle' or 'line'
+    circle:                 # robots evenly distributed on a circle
+      center_x: -2.5
+      center_y: -3.9
+      radius: 0.5           # the hard maze start room is 1.4 m high
+    line:                   # robots in a straight line 'separation' meters apart
+      center_x: 0.0
+      center_y: 0.0
+      separation: 1.0
+      direction: 'vertical' # 'vertical' or 'horizontal'

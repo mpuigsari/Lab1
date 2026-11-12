@@ -18,8 +18,10 @@ Stage reports the commanded velocity in the odom twist, even while the robot is 
 The centroid and its velocity use the same robots: all of them except the ones farther than max_dist.
 The distances are only published while there is a path.
 
-Control law, with c the centroid and w the active waypoint:
-    v = K (w - c), saturated to v_max
+Control law (arrival), with c the centroid, w the active waypoint and D the distance c -> goal along the path:
+    v = min(v_max, K D) (w - c) / |w - c|
+The flock moves at v_max and slows down linearly over the last v_max / K meters of the path, until it stops
+at the goal. D >= |w - c|, so the intermediate waypoints never slow it down.
 w switches to the next waypoint when |w - c| < waypoint_tol. The goal is reached when |goal - c| < goal_tol.
 Nothing is published until the first path arrives, so the flock behaves as plain Reynolds without a goal.
 After the goal is reached, a zero velocity is published to keep the flock stopped there.
@@ -45,7 +47,7 @@ class FlockController(Node):
         # Declare parameters
         self.declare_parameter('number_robots', 6)
         self.declare_parameter('f', 10.0)  # control frequency [Hz]
-        self.declare_parameter('k', 1.0)   # proportional gain [1/s]
+        self.declare_parameter('k', 1.0)   # arrival gain [1/s]: the flock slows down over the last v_max / k meters
         self.declare_parameter('v_max', 0.3)  # flock speed limit [m/s]
         self.declare_parameter('waypoint_tol', 0.3)  # [m] distance to switch to the next waypoint
         self.declare_parameter('goal_tol', 0.1)  # [m] distance to consider the goal reached
@@ -210,11 +212,13 @@ class FlockController(Node):
             self.publish_cmd(np.zeros(2))
             return
 
-        # Proportional control with saturation
-        v = self.k * error
-        speed = np.linalg.norm(v)
-        if speed > self.v_max: v = v * self.v_max / speed
-        self.publish_cmd(v)
+        # Arrival: speed proportional to the remaining path length, saturated to v_max, towards the waypoint
+        dist = np.linalg.norm(error)
+        if dist < 1e-6:
+            self.publish_cmd(np.zeros(2))
+            return
+        speed = min(self.v_max, self.k * self.remaining_path_length(c))
+        self.publish_cmd(speed * error / dist)
 
     def publish_cmd(self, v: np.ndarray):
         msg = Twist()

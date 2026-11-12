@@ -25,6 +25,12 @@ MARKERS_DISPLAY = {
     'Topic': {'Depth': 100, 'Durability Policy': 'Volatile', 'History Policy': 'Keep Last',
               'Reliability Policy': 'Reliable', 'Value': '/flock/markers'},
     'Value': True}
+# RViz display of the steer-to-avoid feelers published by every reynolds_node
+FEELERS_DISPLAY = {
+    'Class': 'rviz_default_plugins/Marker', 'Name': 'SteerFeelers', 'Enabled': True, 'Namespaces': {},
+    'Topic': {'Depth': 100, 'Durability Policy': 'Volatile', 'History Policy': 'Keep Last',
+              'Reliability Policy': 'Reliable', 'Value': '/flock/feelers'},
+    'Value': True}
 TOP_DOWN_VIEW = {
     'Class': 'rviz_default_plugins/TopDownOrtho', 'Name': 'Current View', 'Value': 'TopDownOrtho (rviz_default_plugins)',
     'Angle': 0.0, 'Scale': 70.0, 'X': 0.0, 'Y': 0.0, 'Invert Z Axis': False,
@@ -56,7 +62,8 @@ def distribute_line(k, n, center_x=0, center_y=0, separation=0.5, direction='hor
 
 def write_rviz_config(template_file, number_robots):
     '''Copy the sphero rviz config with one RobotModel display per robot, plus the flock markers
-    (robots colored by obstacle avoidance and their trajectories), in a top-down view. Return its path'''
+    (robots colored by obstacle avoidance and their trajectories) and the steer-to-avoid feelers, in a
+    top-down view. Return its path'''
     with open(template_file, 'r') as f:
         rviz = yaml.safe_load(f)
 
@@ -81,6 +88,7 @@ def write_rviz_config(template_file, number_robots):
         if d['Class'] == 'rviz_default_plugins/TF':
             d['Enabled'] = False
     displays.append(copy.deepcopy(MARKERS_DISPLAY))
+    displays.append(copy.deepcopy(FEELERS_DISPLAY))
 
     # Top-down view of the whole 10 x 10 m map, to look at the trajectories
     rviz['Visualization Manager']['Views']['Current'] = copy.deepcopy(TOP_DOWN_VIEW)

@@ -1,16 +1,18 @@
 '''
-Flock markers node: RViz view of the robots, their trajectories and the obstacle avoidance rule.
+Flock markers node: RViz view of the robots, their trajectories and the obstacle avoidance rules.
 
     sub: robot_i/odom               (nav_msgs/Odometry)         robot positions
-         robot_i/reynolds/obstacle  (geometry_msgs/Vector3Stamped) obstacle avoidance acceleration of robot i
+         robot_i/reynolds/obstacle  (geometry_msgs/Vector3Stamped) potential field (repulsion) acceleration of robot i
+         robot_i/reynolds/steer     (geometry_msgs/Vector3Stamped) steer-to-avoid acceleration of robot i
          flock/centroid             (geometry_msgs/PointStamped)   flock centroid (only with flock navigation)
          flock/path                 (nav_msgs/Path, latched)       a new path clears the trails (clear_on_new_path)
     pub: flock/markers              (visualization_msgs/MarkerArray)
 
 Markers:
-    robots      sphere on every robot: blue, orange while its obstacle avoidance rule is active,
+    robots      sphere on every robot: blue, orange while its potential field (repulsion) is active,
+                purple while only its steer-to-avoid rule is active,
                 gray while its reynolds_node publishes nothing (disabled far robot, or not running)
-    trail_i     trajectory of robot i, drawn behind it. Orange where the robot was avoiding an obstacle
+    trail_i     trajectory of robot i, drawn behind it, with the same colors where it was avoiding an obstacle
     centroid    trajectory of the flock centroid, magenta
 
 The trails are split in chunks of chunk_size points. A full chunk is published once and kept by RViz,
@@ -28,7 +30,8 @@ from visualization_msgs.msg import Marker, MarkerArray
 LATCHED_QOS = QoSProfile(depth=1, durability=DurabilityPolicy.TRANSIENT_LOCAL, reliability=ReliabilityPolicy.RELIABLE)
 
 ROBOT_COLOR = ColorRGBA(r=0.15, g=0.45, b=1.0, a=1.0)     # blue
-AVOIDING_COLOR = ColorRGBA(r=1.0, g=0.45, b=0.0, a=1.0)   # orange
+AVOIDING_COLOR = ColorRGBA(r=1.0, g=0.45, b=0.0, a=1.0)   # orange: potential field (repulsion) active
+STEERING_COLOR = ColorRGBA(r=0.6, g=0.2, b=0.85, a=1.0)   # purple: only steer-to-avoid active
 INACTIVE_COLOR = ColorRGBA(r=0.55, g=0.55, b=0.55, a=1.0)  # gray
 TRAIL_COLOR = ColorRGBA(r=0.15, g=0.45, b=1.0, a=0.6)     # translucent blue
 CENTROID_COLOR = ColorRGBA(r=0.9, g=0.0, b=0.9, a=1.0)    # magenta
@@ -88,7 +91,7 @@ class FlockMarkers(Node):
         self.declare_parameter('trail_width', 0.015)    # [m]
         self.declare_parameter('trail_step', 0.02)      # [m] minimum distance between trail points
         self.declare_parameter('chunk_size', 100)       # trail points per marker
-        self.declare_parameter('avoid_threshold', 1e-3)  # [m/s^2] obstacle acceleration above which a robot is avoiding
+        self.declare_parameter('avoid_threshold', 1e-3)  # [m/s^2] obstacle/steer acceleration above which a robot is avoiding
         self.declare_parameter('inactive_timeout', 0.5)  # [s] no acceleration message for this long: robot inactive
         self.declare_parameter('clear_on_new_path', True)  # a new flock/path (new goal) clears the trails
 
@@ -107,7 +110,8 @@ class FlockMarkers(Node):
         # Initialize variables
         n = self.number_robots
         self.poses = [None] * n
-        self.avoiding = [False] * n
+        self.avoiding = [False] * n  # potential field active
+        self.steering = [False] * n  # steer-to-avoid active
         self.last_accel = [None] * n  # time of the last obstacle acceleration message of each robot
         self.trails = [Trail(f'trail_{i}', width, 0.005, step, chunk_size) for i in range(n)]
         self.centroid_trail = Trail('centroid', 2 * width, 0.01, step, chunk_size)
@@ -118,6 +122,8 @@ class FlockMarkers(Node):
             self.create_subscription(Odometry, f'robot_{i}/odom', lambda msg, id=i: self.odom_callback(msg, id), 10)
             self.create_subscription(Vector3Stamped, f'robot_{i}/reynolds/obstacle',
                                      lambda msg, id=i: self.obstacle_callback(msg, id), 10)
+            self.create_subscription(Vector3Stamped, f'robot_{i}/reynolds/steer',
+                                     lambda msg, id=i: self.steer_callback(msg, id), 10)
         self.create_subscription(PointStamped, 'flock/centroid', self.centroid_callback, 10)
         self.create_subscription(Path, 'flock/path', self.path_callback, LATCHED_QOS)
 
@@ -132,19 +138,28 @@ class FlockMarkers(Node):
         '''True while robot i's reynolds_node keeps publishing its accelerations'''
         return self.last_accel[i] is not None and self.now_sec() - self.last_accel[i] < self.inactive_timeout
 
+    def avoidance_color(self, i: int):
+        '''Orange if the potential field is active (close range), purple if only steer-to-avoid is, else None'''
+        if not self.active(i): return None
+        if self.avoiding[i]: return AVOIDING_COLOR
+        if self.steering[i]: return STEERING_COLOR
+        return None
+
     def robot_color(self, i: int) -> ColorRGBA:
         if not self.active(i): return INACTIVE_COLOR
-        return AVOIDING_COLOR if self.avoiding[i] else ROBOT_COLOR
+        return self.avoidance_color(i) or ROBOT_COLOR
 
     def odom_callback(self, msg: Odometry, robot_id: int):
         p = np.array([msg.pose.pose.position.x, msg.pose.pose.position.y])
         self.poses[robot_id] = p
-        avoiding = self.avoiding[robot_id] and self.active(robot_id)
-        self.trails[robot_id].add(p, AVOIDING_COLOR if avoiding else TRAIL_COLOR)
+        self.trails[robot_id].add(p, self.avoidance_color(robot_id) or TRAIL_COLOR)
 
     def obstacle_callback(self, msg: Vector3Stamped, robot_id: int):
         self.avoiding[robot_id] = np.hypot(msg.vector.x, msg.vector.y) > self.avoid_threshold
         self.last_accel[robot_id] = self.now_sec()
+
+    def steer_callback(self, msg: Vector3Stamped, robot_id: int):
+        self.steering[robot_id] = np.hypot(msg.vector.x, msg.vector.y) > self.avoid_threshold
 
     def centroid_callback(self, msg: PointStamped):
         self.centroid_trail.add(np.array([msg.point.x, msg.point.y]), CENTROID_COLOR)

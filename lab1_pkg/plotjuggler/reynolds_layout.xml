@@ -118,7 +118,7 @@
   <Tab tab_name="Accelerations robot_{robot}" containers="1">
    <Container>
     <DockSplitter orientation="-" sizes="1" count="1">
-     <DockArea name="robot_{robot} acceleration magnitude [m/s^2]: alignment / cohesion / separation / obstacle / navigation">
+     <DockArea name="robot_{robot} acceleration magnitude [m/s^2]: alignment / cohesion / separation / obstacle / steer / navigation">
       <plot mode="TimeSeries" style="Lines" flip_x="false" flip_y="false">
        <range left="0" right="1" top="1" bottom="0"/>
        <limitY min="0"/>
@@ -126,6 +126,7 @@
        <curve name="/robot_{robot}/reynolds/cohesion/magnitude/data" color="#d62728"/>
        <curve name="/robot_{robot}/reynolds/separation/magnitude/data" color="#2ca02c"/>
        <curve name="/robot_{robot}/reynolds/obstacle/magnitude/data" color="#ff7f0e"/>
+       <curve name="/robot_{robot}/reynolds/steer/magnitude/data" color="#8c564b"/>
        <curve name="/robot_{robot}/reynolds/navigation/magnitude/data" color="#9467bd"/>
       </plot>
      </DockArea>
@@ -143,7 +144,7 @@
    <max_array_size value="100"/>
    <boolean_strings_to_number value="true"/>
    <remove_suffix_from_strings value="true"/>
-   <selected_topics value="/flock/goal_distance;/flock/path_distance;/flock/speed;/flock/cmd_speed;/flock/centroid;/robot_{i}/odom;/robot_{robot}/cmd_vel;/robot_{robot}/reynolds/alignment/magnitude;/robot_{robot}/reynolds/cohesion/magnitude;/robot_{robot}/reynolds/separation/magnitude;/robot_{robot}/reynolds/obstacle/magnitude;/robot_{robot}/reynolds/navigation/magnitude;/robot_0/cmd_vel;/robot_1/cmd_vel;/robot_2/cmd_vel;/robot_3/cmd_vel"/>
+   <selected_topics value="/flock/goal_distance;/flock/path_distance;/flock/speed;/flock/cmd_speed;/flock/centroid;/robot_{i}/odom;/robot_{robot}/cmd_vel;/robot_{robot}/reynolds/alignment/magnitude;/robot_{robot}/reynolds/cohesion/magnitude;/robot_{robot}/reynolds/separation/magnitude;/robot_{robot}/reynolds/obstacle/magnitude;/robot_{robot}/reynolds/steer/magnitude;/robot_{robot}/reynolds/navigation/magnitude;/robot_0/cmd_vel;/robot_1/cmd_vel;/robot_2/cmd_vel;/robot_3/cmd_vel"/>
   </plugin>
  </Plugins>
  <previouslyLoaded_Datafiles/>

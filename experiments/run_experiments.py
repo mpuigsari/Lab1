@@ -37,6 +37,8 @@ BASELINE = {
     # Pinned so that editing the package yaml does not change reruns. 1.0 m/s^2 is above every
     # acceleration the cases use (largest: 0.86 in case 11), so the limit never acts by default.
     'brake_acc': 0.1, 'max_acc': 1.0,
+    # Lab 2 rules, off so that the Lab 1 cases stay pure Reynolds (1.0 m/s is Stage's own speed bound)
+    'co': 0.0, 'csa': 0.0, 'max_speed': 1.0,
     'map_name': 'empty_10x10', 'distribution': 'circle',
     'circle': {'center_x': 0.0, 'center_y': 0.0, 'radius': 2.0},
 }

@@ -37,7 +37,7 @@
     rrt_attempts: 3         # restarts before giving up
     rrt_seed: 1            # -1: random seed
     waypoint_spacing: 0.5   # [m] max distance between consecutive path waypoints
-    plan_on_start: true     # plan to (goal_x, goal_y) once every robot is seen; RViz '2D Goal Pose' replans anytime
+    plan_on_start: false     # plan to (goal_x, goal_y) once every robot is seen; RViz '2D Goal Pose' replans anytime
     goal_x: -3.0
     goal_y: 4.0
 
